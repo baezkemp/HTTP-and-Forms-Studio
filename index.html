@@ -1,7 +1,7 @@
 <!doctype html>
 
 <head>
-	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<meta charset="utf-8">
 	<script>
 	function setSearchEngine (){
@@ -15,12 +15,20 @@
 
         let form = document.getElementById("searchForm");
 		let selection = document.querySelector("input[name=engine]:checked");
+
+		if(selection === null){
+			event.preventDefault();
+			alert ('Select a Search Engine.');
+		}
+
 		let selectedURL = actions[selection.value];
 		form.setAttribute("action", selectedURL);
 		}
-    window.addEventListener("load", function(){
+    
+	window.addEventListener("load", function(){
         let form = document.getElementById("searchForm");
         form.addEventListener("submit", setSearchEngine);
+
     });
 	</script>
 </head>
@@ -29,7 +37,7 @@
 
 	<form id="searchForm">
 	<!-- TODO: add form elements -->
-		<input type="text" name="q">
+		<input type="text" name="q" placeholder="Search..." required>
 		<label><input type="radio" name="engine" value="google"> Google </label>
 		<label><input type="radio" name="engine" value="duckDuckGo"> DuckDuckGo </label>
 		<label><input type="radio" name="engine" value="bing"> Bing </label>
